@@ -15,7 +15,7 @@ app.listen(PORT, () => {
 mongoose.set("strictQuery", false);
 mongoose.connect(
   "mongodb+srv://mindx:mindx@clustermindx.nnoes8c.mongodb.net/mindx_database",
-  function (err) {
+  function (err: any) {
     if (err) {
       console.log("Connection error");
       throw err;
