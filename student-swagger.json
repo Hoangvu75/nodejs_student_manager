@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Student manager",
-    "description": "Student manager",
+    "description": "This is Mindx teaching project for students",
     "version": "1.0.0"
   },
   "basePath": "/student",
@@ -71,7 +71,7 @@
                 "message": {
                   "type": "string"
                 },
-                "added_students": {
+                "added_student": {
                   "type": "object",
                   "$ref": "#/definitions/Student"
                 }
@@ -162,7 +162,7 @@
                 "message": {
                   "type": "string"
                 },
-                "updated_students": {
+                "updated_student": {
                   "type": "object",
                   "$ref": "#/definitions/Student"
                 }
@@ -178,7 +178,7 @@
         }
       }
     },
-    "/find": {
+    "/find-by-name": {
       "get": {
         "tags": ["student"],
         "description": "Get a list of students with a name matching the provided query",
@@ -215,6 +215,49 @@
           },
           "404": {
             "description": "No students found with provided name"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/find-by-id/{student_id}": {
+      "get": {
+        "tags": ["student"],
+        "description": "Find a student by id",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "description": "ID of student to find",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "found_student": {
+                  "type": "object",
+                  "$ref": "#/definitions/Student"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Student not found"
           },
           "500": {
             "description": "Internal Server Error"
