@@ -146,6 +146,14 @@
             "description": "Student object that needs to be updated",
             "required": true,
             "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
               "type": "object",
               "properties": {
                 "success": {
@@ -159,14 +167,6 @@
                   "$ref": "#/definitions/Student"
                 }
               }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Student"
             }
           },
           "404": {
