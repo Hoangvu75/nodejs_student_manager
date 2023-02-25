@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "basePath": "/student",
-  "schemes": ["https"],
+  "schemes": ["https, http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
