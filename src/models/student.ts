@@ -1,11 +1,15 @@
 import { Schema, model } from "mongoose";
 
 const genderValidator = /^(male|female)$/i;
-const birthdayValidator = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
+const birthdayValidator =
+  /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
 const phoneValidator = /^(\()?\d{3}(\))?(|\s)?\d{3}(|\s)\d{4}$/;
 
-const Student = new Schema({
-  name: { type: String, required: true },
+export const Student = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   gender: {
     type: String,
     required: true,

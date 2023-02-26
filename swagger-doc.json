@@ -5,12 +5,12 @@
     "description": "This is Mindx teaching project for students",
     "version": "1.0.0"
   },
-  "basePath": "/student",
+  "basePath": "/",
   "schemes": ["https", "http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/student-list": {
+    "/student/student-list": {
       "get": {
         "tags": ["student"],
         "description": "Get a list of students",
@@ -42,7 +42,7 @@
         }
       }
     },
-    "/add-student": {
+    "/student/add-student": {
       "post": {
         "tags": ["student"],
         "description": "Add a new student",
@@ -84,7 +84,7 @@
         }
       }
     },
-    "/remove-student/{student_id}": {
+    "/student/remove-student/{student_id}": {
       "delete": {
         "tags": ["student"],
         "description": "Remove a student",
@@ -126,7 +126,7 @@
         }
       }
     },
-    "/update-student/{student_id}": {
+    "/student/update-student/{student_id}": {
       "put": {
         "tags": ["student"],
         "description": "Update an existing student",
@@ -178,7 +178,7 @@
         }
       }
     },
-    "/find-by-name": {
+    "/student/find-by-name": {
       "get": {
         "tags": ["student"],
         "description": "Get a list of students with a name matching the provided query",
@@ -222,7 +222,7 @@
         }
       }
     },
-    "/find-by-id/{student_id}": {
+    "/student/find-by-id/{student_id}": {
       "get": {
         "tags": ["student"],
         "description": "Find a student by id",
@@ -264,6 +264,89 @@
           }
         }
       }
+    },
+    "/parent/parent-list": {
+      "get": {
+        "tags": ["parent"],
+        "description": "Get a list of parents",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "parent_list": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Parent"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/parent/add-parent": {
+      "post": {
+        "tags": ["parent"],
+        "description": "Add a new student",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Student object that needs to be added",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "children_id": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "added_parent": {
+                  "type": "object",
+                  "$ref": "#/definitions/Parent"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -281,6 +364,20 @@
         },
         "phone": {
           "type": "string"
+        }
+      }
+    },
+    "Parent": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Student"
+          }
         }
       }
     }

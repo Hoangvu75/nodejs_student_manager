@@ -2,10 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import studentRoute from "./routes/student";
 import swaggerUi from "swagger-ui-express";
-import * as studentSwaggerDocument from "../student-swagger.json";
+import * as swaggerDocument from "../swagger-doc.json";
+import parentsRoute from "./routes/parent";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -25,8 +29,9 @@ mongoose.connect(
   }
 );
 
-// Set up routes
+// routes
 app.use('/student', studentRoute);
+app.use('/parent', parentsRoute);
 
-// Set up swagger
-app.use("/", swaggerUi.serve, swaggerUi.setup(studentSwaggerDocument));
+// swagger
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

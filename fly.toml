@@ -1,0 +1,18 @@
+# fly.toml file generated for nodejs-student-manager on 2023-02-26T14:58:03+07:00
+
+app = "nodejs-student-manager"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 10
+    soft_limit = 8
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
